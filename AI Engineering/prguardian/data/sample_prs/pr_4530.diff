@@ -1,0 +1,23 @@
+diff --git a/api/catalog.py b/api/catalog.py
+index aa11bb2..cc33dd4 100644
+--- a/api/catalog.py
++++ b/api/catalog.py
+@@ -1,8 +1,18 @@
+ from .db import connection
+
++# Simple in-process cache for the product catalog.
++_CACHE = {}
++
++
++def get_product(product_id: str):
++    if product_id in _CACHE:
++        return _CACHE[product_id]
++    row = connection().execute(
++        "SELECT * FROM products WHERE id = ?", (product_id,)
++    ).fetchone()
++    _CACHE[product_id] = dict(row)
++    return _CACHE[product_id]
++
+
+ def list_products():
+     return connection().execute("SELECT * FROM products").fetchall()

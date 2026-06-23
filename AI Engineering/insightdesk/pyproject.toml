@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insightdesk"
+version = "0.1.0"
+description = "AI support & research assistant — LangGraph + Claude: agents, RAG, MCP, memory"
+requires-python = ">=3.10"
+dependencies = [
+    "langchain>=0.3",
+    "langchain-anthropic>=0.3",
+    "langchain-community>=0.3",
+    "langchain-chroma>=0.2",
+    "langchain-huggingface>=0.1",
+    "langchain-text-splitters>=0.3",
+    "langgraph>=0.2.50",
+    "langgraph-checkpoint-sqlite>=2.0",
+    "langchain-mcp-adapters>=0.1",
+    "mcp>=1.2",
+    "sentence-transformers>=2.6",
+    "chromadb>=0.5",
+    "python-dotenv>=1.0",
+    "pydantic>=2.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

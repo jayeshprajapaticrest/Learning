@@ -1,0 +1,26 @@
+diff --git a/api/users.py b/api/users.py
+index 1a2b3c4..5d6e7f8 100644
+--- a/api/users.py
++++ b/api/users.py
+@@ -10,6 +10,20 @@ from .db import connection
+ router = APIRouter()
+
+
++@router.get("/users/{user_id}/export")
++async def export_user(user_id: str):
++    # Export all data for a user as JSON.
++    db = connection()
++    query = f"SELECT * FROM users WHERE id = '{user_id}'"
++    rows = db.execute(query).fetchall()
++    records = []
++    for row in rows:
++        # fetch each user's orders one at a time
++        orders = db.execute(
++            f"SELECT * FROM orders WHERE user_id = '{row['id']}'"
++        ).fetchall()
++        records.append({"user": dict(row), "orders": [dict(o) for o in orders]})
++    return {"data": records}
++
+
+ @router.get("/users/{user_id}")
+ async def get_user(user_id: str):

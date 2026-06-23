@@ -1,0 +1,2 @@
+{"pr_id": "PR-4521", "expect_decision_in": ["request_changes", "escalate"], "expect_keywords": ["sql", "authorization"]}
+{"pr_id": "PR-4530", "expect_decision_in": ["comment", "request_changes"], "expect_keywords": ["cache", "ttl"]}
